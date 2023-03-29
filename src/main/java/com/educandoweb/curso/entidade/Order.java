@@ -3,6 +3,8 @@ package com.educandoweb.curso.entidade;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,21 +21,22 @@ public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
-	private User client;
+	private User cliente;
 	
 	public Order() {
 		
 	}
 
-	public Order(Long id, Instant moment, User client) {
+	public Order(Long id, Instant moment, User cliente) {
 		super();
 		this.id = id;
 		this.moment = moment;
-		this.client = client;
+		this.cliente = cliente;
 	}
 
 	public Long getId() {
@@ -52,12 +55,12 @@ public class Order implements Serializable{
 		this.moment = moment;
 	}
 
-	public User getClient() {
-		return client;
+	public User getCliente() {
+		return cliente;
 	}
 
-	public void setClient(User client) {
-		this.client = client;
+	public void setClient(User cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override
