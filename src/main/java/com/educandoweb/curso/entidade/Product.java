@@ -10,28 +10,32 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-
 @Entity
-@Table(name = "tb_category")
-public class Categoria implements Serializable{
+@Table(name = "tb_product")
+public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private String descricao;
+	private double preco;
+	private String imgurl;
 	
 	@Transient
-	private Set<Product> products = new HashSet<>();
-	
-	public Categoria() {
-		
-	}
+	private Set<Categoria> categories = new HashSet<>();
 
-	public Categoria(Long id, String nome) {
+	public Product() {
+	}
+	
+	public Product(Long id, String nome, String descricao, double preco, String imgurl) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.imgurl = imgurl;
 	}
 
 	public Long getId() {
@@ -49,9 +53,33 @@ public class Categoria implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public Set<Product> getProducts() {
-		return products;
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+
+	public Set<Categoria> getCategories() {
+		return categories;
 	}
 
 	@Override
@@ -70,7 +98,7 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Product other = (Product) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,7 +106,7 @@ public class Categoria implements Serializable{
 			return false;
 		return true;
 	}
-
-		
-
+	
+	
+	
 }
