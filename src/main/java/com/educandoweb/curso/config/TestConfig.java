@@ -10,13 +10,16 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.curso.entidade.Categoria;
 import com.educandoweb.curso.entidade.Order;
+import com.educandoweb.curso.entidade.OrderItem;
 import com.educandoweb.curso.entidade.Product;
 import com.educandoweb.curso.entidade.User;
 import com.educandoweb.curso.entidade.enums.OrderStatus;
 import com.educandoweb.curso.repositorios.CategoryRepository;
+import com.educandoweb.curso.repositorios.OrdemItemRepository;
 import com.educandoweb.curso.repositorios.OrderRepository;
 import com.educandoweb.curso.repositorios.ProductRepository;
 import com.educandoweb.curso.repositorios.UserRepository;
+
 
 @Configuration
 @Profile("test") // Nesse @ informar que é apenas para teste como já informado application.properties
@@ -33,6 +36,9 @@ public class TestConfig implements CommandLineRunner{
 
 	@Autowired 
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private OrdemItemRepository ordemItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,6 +75,13 @@ public class TestConfig implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(u1,u2,u3));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPreco());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPreco());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPreco());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPreco());
+	
+		ordemItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi4));
 	}
 
 	
