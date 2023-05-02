@@ -23,4 +23,10 @@ public class UserServices {
 		Optional<User> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	//Operaco para salvar usuario no banco de dados -  vi retornar o usuario salvo - 314
+	
+	public User insert(User obj) {
+		return repository.save(obj);
+	}
 }
